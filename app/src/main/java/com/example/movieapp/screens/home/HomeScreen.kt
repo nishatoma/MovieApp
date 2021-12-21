@@ -9,8 +9,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.movieapp.MovieRow
+import com.example.movieapp.components.MovieRow;
 import com.example.movieapp.components.MovieAppTopBar
+import com.example.movieapp.model.Movie
+import com.example.movieapp.model.getMovies
 import com.example.movieapp.screens.MovieScreens
 
 // Remember this composable is called
@@ -26,11 +28,7 @@ fun HomeScreen(navController: NavController) {
 @Composable
 fun MainContent(
     navController: NavController,
-    movieList: List<String> = listOf(
-        "Avatar",
-        "300",
-        "Harry Potter"
-    )
+    movieList: List<Movie> = getMovies()
 ) {
     // Create a structure that will allow us to create
     // a list of movies
@@ -42,7 +40,7 @@ fun MainContent(
                     // We can actually use navController now to access
                     // the details screen!!
                     // Now we have to pass the actual data
-                    navController.navigate(MovieScreens.DetailScreen.name + "/$movie")
+                    navController.navigate(MovieScreens.DetailScreen.name + "/${movie}")
                 }
             }
         }

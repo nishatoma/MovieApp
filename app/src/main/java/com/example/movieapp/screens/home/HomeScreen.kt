@@ -51,7 +51,8 @@ fun MainContent(
                     Log.d("MainActivity", "MainContent: $movie ")
                     // We can actually use navController now to access
                     // the details screen!!
-                    navController.navigate(MovieScreens.DetailScreen.name)
+                    // Now we have to pass the actual data
+                    navController.navigate(MovieScreens.DetailScreen.name+"/$movie")
                 }
             }
         }

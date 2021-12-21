@@ -1,9 +1,12 @@
 package com.example.movieapp.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavBackStackEntry
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.movieapp.screens.MovieScreens
 import com.example.movieapp.screens.home.HomeScreen
 import com.example.movieapp.screens.details.DetailsScreen
@@ -21,9 +24,16 @@ fun MovieNavigation() {
             HomeScreen(navController = navController)
         }
 
-        composable(MovieScreens.DetailScreen.name) {
+        // This is basically routing  to the activity we want
+        // Now we will pass some data
+        // with appending the name {movie}!!
+        composable(MovieScreens.DetailScreen.name+"/{movie}",
+        arguments = listOf(navArgument(name = "movie") {type = NavType.StringType})) {
+            backStackEntry ->
             // Here we can go to DetailScreen for example
-            DetailsScreen(navController = navController)
+            // Now add the arguments string to the DetailsScreen too
+            DetailsScreen(navController = navController,
+            backStackEntry.arguments?.getString("movie"))
         }
     }
 }

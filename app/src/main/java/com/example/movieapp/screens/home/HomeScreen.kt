@@ -5,15 +5,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.movieapp.MovieRow
+import com.example.movieapp.components.MovieAppTopBar
 import com.example.movieapp.screens.MovieScreens
 
 // Remember this composable is called
@@ -21,15 +18,8 @@ import com.example.movieapp.screens.MovieScreens
 @Composable
 fun HomeScreen(navController: NavController) {
     // Scaffold
-    Scaffold(topBar = {
-        TopAppBar(
-            backgroundColor = Color.Magenta,
-            elevation = 5.dp
-        ) {
-            Text(text = "Movies")
-        }
-    }) {
-        MainContent(navController = navController)
+    MovieAppTopBar(padding = 5.dp) {
+        MainContent(navController)
     }
 }
 
@@ -52,7 +42,7 @@ fun MainContent(
                     // We can actually use navController now to access
                     // the details screen!!
                     // Now we have to pass the actual data
-                    navController.navigate(MovieScreens.DetailScreen.name+"/$movie")
+                    navController.navigate(MovieScreens.DetailScreen.name + "/$movie")
                 }
             }
         }

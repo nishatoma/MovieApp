@@ -1,5 +1,6 @@
 package com.example.movieapp.components
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CornerSize
@@ -14,6 +15,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import coil.compose.rememberImagePainter
+import coil.transform.CircleCropTransformation
 import com.example.movieapp.model.Movie
 
 @Composable
@@ -67,13 +70,35 @@ fun MovieRow(movie: Movie, onItemClick: (String) -> Unit = {}) {
                 shape = RectangleShape,
                 elevation = 5.dp
             ) {
-                Icon(
-                    imageVector = Icons.Default.AccountBox,
-                    contentDescription = "Movie Image"
+                // Bring images from URL
+                Image(
+                    painter = rememberImagePainter(
+                        data = movie.images[0],
+                        builder = {
+                            transformations(CircleCropTransformation())
+                        }
+                    ),
+                    contentDescription = "Movie Poster",
+                    modifier = Modifier.size(128.dp)
+                )
+
+            }
+
+            Column(modifier = Modifier.padding(4.dp)) {
+                Text(
+                    text = movie.title,
+                    style = MaterialTheme.typography.h6
+                )
+                Text(
+                    text = "Director: ${movie.director}",
+                    style = MaterialTheme.typography.caption
+                )
+                Text(
+                    text = "Released: ${movie.year}",
+                    style = MaterialTheme.typography.caption
                 )
             }
 
-            Text(text = movie.title)
         }
 
     }

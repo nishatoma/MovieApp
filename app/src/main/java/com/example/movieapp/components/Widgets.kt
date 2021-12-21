@@ -121,7 +121,7 @@ fun MovieRow(movie: Movie, onItemClick: (String) -> Unit = {}) {
                 )
                 // The info that's gonna be hidden at first
                 AnimatedVisibility(visible = expanded.value) {
-                    Column() {
+                    Column {
                         Text(buildAnnotatedString {
                             // This allows us to actually change individual strings
                             // we want to show
@@ -142,7 +142,23 @@ fun MovieRow(movie: Movie, onItemClick: (String) -> Unit = {}) {
                             ) {
                                 append(movie.plot)
                             }
-                        })
+                        }, modifier = Modifier.padding(6.dp))
+                        Divider()
+                        Text(
+                            text = "Director: ${movie.director}",
+                            style = MaterialTheme.typography.caption,
+                            modifier = Modifier.padding(6.dp)
+                        )
+                        Text(
+                            text = "Actors: ${movie.actors}",
+                            style = MaterialTheme.typography.caption,
+                            modifier = Modifier.padding(6.dp)
+                        )
+                        Text(
+                            text = "Rating: ${movie.rating}",
+                            style = MaterialTheme.typography.caption,
+                            modifier = Modifier.padding(6.dp)
+                        )
                     }
                 }
 
